@@ -1,6 +1,49 @@
-import { Link } from "react-router";
+import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../provider/AuthContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const { createUserWithEmailAndPasswordFunc, updateProfileFunc, setUser } =
+    useContext(AuthContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state || "/";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const displayName = e.target.name?.value;
+    const photoURL = e.target.photo?.value;
+    const email = e.target.email?.value;
+    const password = e.target.password?.value;
+
+    const regExp = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
+    if (!regExp.test(password)) {
+      toast.error(
+        "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long."
+      );
+      return;
+    }
+    createUserWithEmailAndPasswordFunc(email, password)
+      .then((res) => {
+        // 2nd step: Update profile
+        updateProfileFunc(displayName, photoURL)
+          .then(() => {
+            console.log(res.user);
+            setUser(res.user);
+            toast.success("Signup successful ");
+            navigate(from);
+          })
+          .catch((e) => {
+            toast.error(e.message);
+          });
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
+
   return (
     <div className="flex mt-[50px] min-h-[720px] md:w-11/12 mx-auto">
       <div className="flex-3 flex flex-col items-center justify-center  md:shadow-sm md:rounded-l-xl md:border border-r-0 md:border-accent-content">
@@ -8,6 +51,7 @@ const Register = () => {
           Sign Up to FinEase
         </h2>
         <form
+          onSubmit={handleSubmit}
           action=""
           className="fieldset lg:w-7/12 md:11/12 mx-auto max-w-[320px] "
         >
@@ -55,7 +99,6 @@ const Register = () => {
               </g>
             </svg>
             <input
-              onChange={(e) => setEmail(e.target.value)}
               name="email"
               type="email"
               className="  text-base-content"
@@ -127,7 +170,7 @@ const Register = () => {
             to="/login"
             className="text-blue-500 hover:text-blue-800 font-medium underline"
           >
-            Login
+            Register
           </Link>
         </p>
       </div>

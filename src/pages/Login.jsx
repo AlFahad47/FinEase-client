@@ -1,6 +1,40 @@
-import { Link } from "react-router";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../provider/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const {
+    signInWithEmailAndPasswordFunc,
+    setUser,
+    setLoading,
+    signInWithGoogleFunc,
+  } = useContext(AuthContext);
+
+  const location = useLocation();
+  const from = location.state || "/";
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email?.value;
+    const password = e.target.password?.value;
+    // console.log({ email, password });
+    signInWithEmailAndPasswordFunc(email, password)
+      .then((res) => {
+        console.log(res);
+        setLoading(false);
+
+        setUser(res.user);
+        toast.success("Signin successful");
+        navigate(from);
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error(e.message);
+      });
+  };
+
   return (
     <div className="flex mt-[50px] min-h-[720px] md:w-11/12 mx-auto">
       <div className="flex-3 flex flex-col items-center justify-center  md:shadow-sm md:rounded-l-xl md:border border-r-0 md:border-accent-content">
@@ -8,6 +42,7 @@ const Login = () => {
           Sign in to FinEase
         </h2>
         <form
+          onSubmit={handleLogin}
           action=""
           className="fieldset lg:w-7/12 md:11/12 mx-auto max-w-[320px] "
         >
@@ -30,7 +65,6 @@ const Login = () => {
               </g>
             </svg>
             <input
-              onChange={(e) => setEmail(e.target.value)}
               name="email"
               type="email"
               className="  text-base-content"

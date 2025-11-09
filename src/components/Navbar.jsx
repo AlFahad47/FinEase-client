@@ -1,6 +1,24 @@
-import { NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import logoImg from "../assets/logo.png";
+import { use } from "react";
+import { AuthContext } from "../provider/AuthContext";
+import { toast } from "react-toastify";
 const Navbar = () => {
+  const { user, setUser, loading, setLoading, signoutUserFunc } =
+    use(AuthContext);
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+
+  const handleSignout = () => {
+    signoutUserFunc()
+      .then(() => {
+        toast.success("Signout successful");
+        setUser(null);
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
   const navLinks = (
     <>
       <li>
@@ -83,34 +101,41 @@ const Navbar = () => {
             </svg>
           </label>
           {/* profile */}
-          <div className="dropdown dropdown-end">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+
+          {user ? (
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  />
+                </div>
               </div>
+              <ul
+                tabIndex="-1"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              >
+                <li>
+                  <a>fahad@gmail.com</a>
+                </li>
+                <li>
+                  <a>Fahad Molla</a>
+                </li>
+                <li>
+                  <p onClick={handleSignout}>Logout</p>
+                </li>
+              </ul>
             </div>
-            <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
-            >
-              <li>
-                <a>fahad@gmail.com</a>
-              </li>
-              <li>
-                <a>Fahad Molla</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
-          </div>
+          ) : isLoginPage ? (
+            <Link to="/register">Register</Link>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
         </div>
       </div>
     </div>
