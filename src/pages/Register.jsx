@@ -161,7 +161,7 @@ const Register = () => {
           <input
             type="submit"
             className="btn btn-primary mt-3"
-            value="Sign In"
+            value="Register"
           />
         </form>
         <p className="pt-4 md:w-7/12  mb-10 max-w-[320px]  mx-auto">
@@ -170,7 +170,7 @@ const Register = () => {
             to="/login"
             className="text-blue-500 hover:text-blue-800 font-medium underline"
           >
-            Register
+            Login
           </Link>
         </p>
       </div>
