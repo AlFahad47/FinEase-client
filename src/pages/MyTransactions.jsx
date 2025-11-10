@@ -3,6 +3,7 @@ import { AuthContext } from "../provider/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import incomePng from "../assets/income.png";
 import expensePng from "../assets/expense.png";
+import Swal from "sweetalert2";
 
 const MyTransactions = () => {
   const { user, loading } = use(AuthContext);
@@ -16,6 +17,39 @@ const MyTransactions = () => {
     });
   }, [user, axiosSecure]);
 
+  const handleDeleteTransaction = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to delete the record?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/transaction/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your bid has been deleted.",
+                icon: "success",
+              });
+
+              //
+              const remainingTransactions = transactions.filter(
+                (bid) => bid._id !== _id
+              );
+              setTransactions(remainingTransactions);
+            }
+          });
+      }
+    });
+  };
   if (loading) return <p>loading</p>;
   return (
     <div>
@@ -44,8 +78,11 @@ const MyTransactions = () => {
             </div>
             <div className="flex justify-evenly  w-10/12 mx-auto mb-5">
               <button className="btn btn-primary ">Update </button>
-              <button className="btn bg-red-500 border-0 text-white  ">
-                Delete{" "}
+              <button
+                onClick={() => handleDeleteTransaction(transaction._id)}
+                className="btn bg-red-500 border-0 text-white  "
+              >
+                Delete
               </button>
             </div>
             <div className="mb-5">
