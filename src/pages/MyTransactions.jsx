@@ -4,18 +4,27 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import incomePng from "../assets/income.png";
 import expensePng from "../assets/expense.png";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyTransactions = () => {
   const { user, loading } = use(AuthContext);
   const [transactions, setTransactions] = useState([]);
   const axiosSecure = useAxiosSecure();
+  const [sort, setSort] = useState("date-desc");
 
   useEffect(() => {
-    axiosSecure.get(`/my-transactions?email=${user?.email}`).then((data) => {
-      console.log("secure bids data", data);
-      setTransactions(data.data);
-    });
-  }, [user, axiosSecure]);
+    const [field, order] = sort.split("-");
+    axiosSecure
+      .get(
+        `/my-transactions?email=${user?.email}&sort=${field}&order=${
+          order === "asc" ? 1 : -1
+        }`
+      )
+      .then((data) => {
+        console.log("secure transaction data", data);
+        setTransactions(data.data);
+      });
+  }, [user, axiosSecure, sort]);
 
   const handleDeleteTransaction = (_id) => {
     Swal.fire({
@@ -53,6 +62,20 @@ const MyTransactions = () => {
   if (loading) return <p>loading</p>;
   return (
     <div>
+      <div className="flex justify-center items-center w-full mx-auto mt-5 bg-accent p-2 rounded-lg">
+        <h2 className="flex-1">My Transactions</h2>
+        <select
+          className="select   mx-auto"
+          value쇼={sort}
+          onChange={(e) => setSort(e.target.value)}
+        >
+          <option value="date-desc">Date (Newest to Oldest)</option>
+          <option value="date-asc">Date (Oldest to Newest)</option>
+          <option value="amount-desc">Amount (High to Low)</option>
+          <option value="amount-asc">Amount (Low to High)</option>
+        </select>
+      </div>
+
       <div className="grid grid-cols-3 gap-2.5 my-10">
         {transactions.map((transaction, index) => (
           <div
@@ -86,7 +109,12 @@ const MyTransactions = () => {
               </button>
             </div>
             <div className="mb-5">
-              <button className="btn btn-primary w-10/12">View Details</button>
+              <Link
+                className="btn btn-primary w-10/12"
+                to={`/transaction-details/${transaction._id}`}
+              >
+                View Details
+              </Link>
             </div>
           </div>
         ))}
