@@ -44,7 +44,11 @@ const TransactionDetails = () => {
         </h2>
         <div className="flex  items-center  justify-between w-full bg-base-200 rounded-lg my-2 p-2">
           <h2 className="   font-bold ">{transaction.type}</h2>
-          <h2 className="text-xl font-semibold">{transaction.date}</h2>
+          <h2 className="text-xl font-semibold">
+            {transaction.date
+              ? new Date(transaction.date).toISOString().split("T")[0]
+              : ""}
+          </h2>
         </div>
 
         <div>
