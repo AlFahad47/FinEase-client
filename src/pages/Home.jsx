@@ -2,6 +2,8 @@ import { use, useEffect, useState } from "react";
 import homeImg from "../assets/homeImg.png";
 import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../provider/AuthContext";
+import tipsPng from "../assets/tips.png";
+import whyPng from "../assets/why.png";
 
 const Home = () => {
   const axiosInstance = useAxios();
@@ -57,6 +59,78 @@ const Home = () => {
           <div>
             <h2 className="font-normal text-sm">Total Expenses </h2>
             <h2 className="font-black text-6xl mt-4">{totals.totalExpense}</h2>
+          </div>
+        </div>
+      </div>
+      <div className="my-10">
+        <h2 className="text-center mb-10 md:text-3xl text-xl md:font-semibold font-bold ">
+          Budgeting Tips
+        </h2>
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-10 text-center w-11/12 mx-auto">
+          <div className="border p-5 rounded-xl">
+            <div className="flex justify-between items-center w-10/12 mx-auto mb-5 ">
+              <h2> Review & Adjust Monthly </h2>{" "}
+              <img src={tipsPng} className="w-8" alt="" />
+            </div>
+            <p>
+              Check your progress at the end of every month. Adapt your budget
+              as your goals or income change.
+            </p>
+          </div>
+          <div className="border p-5 rounded-xl">
+            <div className="flex justify-between items-center w-10/12 mx-auto mb-5 ">
+              <h2> Set Realistic Goals</h2>{" "}
+              <img src={tipsPng} className="w-8" alt="" />
+            </div>
+            <p>
+              {" "}
+              Define short-term and long-term financial goals. Create budgets
+              that align with your income and priorities.
+            </p>
+          </div>
+          <div className="border p-5 rounded-xl">
+            <div className="flex justify-between items-center w-10/12 mx-auto mb-5 ">
+              <h2> Follow the 50/30/20 Rule</h2>{" "}
+              <img src={tipsPng} className="w-8" alt="" />
+            </div>
+            <p>
+              {" "}
+              Spend 50% on needs, 30% on wants, and save 20%. This simple rule
+              ensures balance and savings growth.
+            </p>
+          </div>
+          <div className="border p-5 rounded-xl">
+            <div className="flex justify-between items-center w-10/12 mx-auto mb-5 ">
+              <h2> Automate Savings</h2>{" "}
+              <img src={tipsPng} className="w-8" alt="" />
+            </div>
+            <p>
+              {" "}
+              Set up automatic transfers to your savings account right after
+              each paycheck — pay yourself first.
+            </p>
+          </div>
+        </div>
+      </div>
+      {/* Why Financial Planning Matters */}
+      <div className="flex flex-col text-center ">
+        <div>
+          <h2 className="text-center md:mb-10 mb-5 md:text-3xl text-xl md:font-semibold font-bold ">
+            Why Financial Planning Matters
+          </h2>
+          <div className="flex md:flex-row flex-col-reverse justify-between gap-30 items-center w-10/12 mx-auto mb-10">
+            <img
+              src={whyPng}
+              className="md:max-w-[400px] max-w-[300px] flex-1"
+              alt=""
+            />
+            <p className="flex-1 lg:text-2xl md:text-lg text-lg">
+              Financial planning is more than just budgeting — it’s about
+              creating a roadmap for your life. It helps you manage your income,
+              control expenses, and prepare for the future with confidence. With
+              a clear plan, you can make smart decisions, achieve your goals
+              faster, and live with financial peace of mind.
+            </p>
           </div>
         </div>
       </div>
