@@ -62,10 +62,12 @@ const MyTransactions = () => {
   if (loading) return <p>loading</p>;
   return (
     <div>
-      <div className="flex justify-center items-center w-full mx-auto mt-5 bg-accent p-2 rounded-lg">
-        <h2 className="flex-1">My Transactions</h2>
+      <div className="flex md:flex-row flex-col  justify-center items-center w-full mx-auto mt-5 bg-accent p-2 rounded-lg">
+        <h2 className="flex-1 md:text-3xl font-bold md:mb-auto mb-3.5">
+          My Transactions
+        </h2>
         <select
-          className="select   mx-auto"
+          className="select   mx-auto md:mb-auto mb-3.5"
           value쇼={sort}
           onChange={(e) => setSort(e.target.value)}
         >
@@ -76,11 +78,11 @@ const MyTransactions = () => {
         </select>
       </div>
 
-      <div className="grid grid-cols-3 gap-2.5 my-10">
+      <div className="grid lg:grid-cols-5 md:grid-cols-2 gap-10 my-10 items-center ">
         {transactions.map((transaction, index) => (
           <div
             key={index}
-            className="bg-base-200 shadow-md hover:shadow-2xl  hover:scale-101 hover:-translate-y-2 text-center w-[240px] "
+            className="bg-base-200 shadow-md hover:shadow-2xl  hover:scale-101 hover:-translate-y-2 text-center w-[240px]  mx-auto"
           >
             <div className="flex justify-center items-center mt-5 mb-2 gap-2.5">
               <h2 className="font-semibold text-2xl ">{transaction.type}</h2>

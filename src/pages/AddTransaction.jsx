@@ -19,7 +19,7 @@ const expenseList = [
 const incomeList = ["Salary", "Pocket Money", "Business"];
 
 const AddTransaction = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [isEnabled, setIsEnabled] = useState(false);
   const [category, setCategory] = useState("");
 
@@ -65,6 +65,10 @@ const AddTransaction = () => {
         toast.error("Failed to add Transaction ", error);
       });
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex  flex-col items-center   my-10 bg-base-300 p-5 max-w-[600px] rounded-3xl mx-auto">
