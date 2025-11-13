@@ -10,6 +10,7 @@ import Profile from "../pages/Profile";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PageNotFound from "../pages/PageNotFound";
+import UpdateProfile from "../pages/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,8 @@ export const router = createBrowserRouter([
       { path: "/transaction-details/:id", element: <TransactionDetails /> },
       { path: "/reports", element: <Reports /> },
       { path: "/profile", element: <Profile /> },
+      { path: "/update-profile", element: <UpdateProfile /> },
+
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
     ],

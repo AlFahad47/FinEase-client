@@ -17,7 +17,7 @@ const Profile = () => {
         <h2>{user?.displayName}</h2>
         <h2>{user?.email}</h2>
         <Link
-          to="/update"
+          to="/update-profile"
           className="btn btn-neutral bg-primary mt-4  mb-2.5 w-10/12 mx-auto"
         >
           Update
