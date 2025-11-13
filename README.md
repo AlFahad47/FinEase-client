@@ -1,16 +1,33 @@
-# React + Vite
+# FinEase - Personal Finance Management App 💰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**FinEase** is a modern, responsive personal finance management web application that helps users track income, expenses, set budgets, and visualize financial insights through interactive charts.
 
-Currently, two official plugins are available:
+🌐 **Live Site URL**: [https://test.netlify.app]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Secure Authentication** – Email/password login & Google Sign-In with Firebase Authentication. Conditional navbar shows user avatar & dropdown (email, name, logout).
+- **Full CRUD Operations** – Add, view, update, and delete transactions with real-time UI updates and toast notifications (React-Toastify).
+- **Interactive Financial Reports** – Beautiful Pie & Bar charts using **Recharts** to visualize expense categories and monthly trends.
+- **Smart Transaction Management** – Filter & **server-side sorting** by date/amount, card layout with equal height cards, instant delete confirmation via SweetAlert2.
+- **Light / Dark Mode Toggle** – Seamless theme switching with persistent user preference.
+- **Fully Responsive Design** – Works perfectly on mobile, tablet, and desktop using Tailwind CSS + DaisyUI.
+- **Loading Spinners & Custom Toasts** – No browser alerts; all success/error messages shown via toast.
+- **Custom 404 Page** – Friendly not-found page for invalid routes.
+- **Secure Authentication:**  
+  Email-password and Google login supported. User-specific transactions are fetched securely from MongoDB.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Tech Stack
+
+- React 19 + Vite
+- React Router v7
+- Firebase Authentication
+- Tailwind CSS + DaisyUI
+- Recharts (data visualization)
+- React-Toastify & SweetAlert2
+- Axios for API calls
+- React Spinners
