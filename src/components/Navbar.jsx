@@ -21,7 +21,7 @@ const Navbar = () => {
       });
   };
   const navLinks = (
-    <>
+    <div className="navbar">
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
@@ -35,7 +35,7 @@ const Navbar = () => {
       <li>
         <NavLink to="/reports">Reports </NavLink>
       </li>
-    </>
+    </div>
   );
   return (
     <div>
