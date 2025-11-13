@@ -23,7 +23,7 @@
 }
 
 /* for nav active */
-.navbar ul a.active {
+.nav-new ul a.active {
   @apply bg-accent text-white;
 }
 

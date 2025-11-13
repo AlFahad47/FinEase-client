@@ -21,7 +21,7 @@ const Navbar = () => {
       });
   };
   const navLinks = (
-    <div className="navbar">
+    <>
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
@@ -35,7 +35,7 @@ const Navbar = () => {
       <li>
         <NavLink to="/reports">Reports </NavLink>
       </li>
-    </div>
+    </>
   );
   return (
     <div>
@@ -61,7 +61,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow "
             >
               {navLinks}
             </ul>
@@ -74,7 +74,7 @@ const Navbar = () => {
             FinEase
           </NavLink>
         </div>
-        <div className="navbar-center hidden lg:flex">
+        <div className="navbar-center hidden lg:flex nav-new">
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end">
