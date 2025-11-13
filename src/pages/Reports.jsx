@@ -13,6 +13,8 @@ import {
   Bar,
   ResponsiveContainer,
 } from "recharts";
+import NoData from "./NoData";
+import Loading from "./Loading";
 
 const COLORS = ["green", "red", "blue", "#EEA121 "];
 
@@ -27,6 +29,7 @@ const Reports = () => {
   const axiosInstance = useAxios();
 
   const { user, loading, setLoading } = useContext(AuthContext);
+
   const [chart, setChart] = useState([]);
   const [barChart, setBarChart] = useState([]);
   useEffect(() => {
@@ -43,7 +46,6 @@ const Reports = () => {
           value: item.total,
         }));
         setChart(pieChart);
-
         setBarChart(
           data.data.monthly.map((item) => ({
             ...item,
@@ -53,7 +55,8 @@ const Reports = () => {
       });
   }, [user, axiosInstance]);
 
-  if (loading) return <p>loading</p>;
+  if (loading) return <Loading></Loading>;
+  if (!barChart.length && !chart.length) return <NoData></NoData>;
   return (
     <div>
       <h2 className="text-center font-semibold md:text-4xl text-2xl mt-15">

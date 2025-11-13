@@ -5,9 +5,11 @@ import incomePng from "../assets/income.png";
 import expensePng from "../assets/expense.png";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import NoData from "./NoData";
+import Loading from "./Loading";
 
 const MyTransactions = () => {
-  const { user, loading } = use(AuthContext);
+  const { user, loading, setLoading } = use(AuthContext);
   const [transactions, setTransactions] = useState([]);
   const axiosSecure = useAxiosSecure();
   const [sort, setSort] = useState("date-desc");
@@ -59,7 +61,9 @@ const MyTransactions = () => {
       }
     });
   };
-  if (loading) return <p>loading</p>;
+
+  if (loading) return <Loading></Loading>;
+  if (!transactions.length) return <NoData></NoData>;
   return (
     <div>
       <div className="flex md:flex-row flex-col  justify-center items-center w-full mx-auto mt-5 bg-accent p-2 rounded-lg">
@@ -68,7 +72,7 @@ const MyTransactions = () => {
         </h2>
         <select
           className="select   mx-auto md:mb-auto mb-3.5"
-          value쇼={sort}
+          value={sort}
           onChange={(e) => setSort(e.target.value)}
         >
           <option value="date-desc">Date (Newest to Oldest)</option>

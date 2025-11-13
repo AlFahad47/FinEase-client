@@ -35,7 +35,7 @@ const Home = () => {
   return (
     <div>
       {/* Banner Section (motivational tagline)    */}
-      <div className="flex md:flex-row  flex-col-reverse justify-center md:w-10/12 md:px-10 px-4 text-center rounded-lg gap-10   my-5 mx-auto items-center bg-accent">
+      <div className="flex md:flex-row  flex-col-reverse justify-center md:w-11/12 md:px-10 px-4 text-center rounded-lg gap-10   my-5 mx-auto items-center bg-accent">
         <div className="flex-1 max-w-[550px]">
           <h2 className="md:text-3xl text-xl md:font-semibold font-bold mb-2">
             FinEase — Your Personal Finance Management App
@@ -52,7 +52,8 @@ const Home = () => {
           alt=""
         />
       </div>
-      <div className="flex flex-col justify-center items-center bg-base-200 py-5">
+      {/* smart money */}
+      <div className="flex flex-col justify-center items-center bg-base-200 py-5 md:w-11/12 mx-auto rounded-lg">
         <h2 className="font-bold md:text-4xl text-2xl text-center">
           Smart Money Management Made Simple
         </h2>
@@ -133,10 +134,10 @@ const Home = () => {
           <h2 className="text-center md:mb-10 mb-5 md:text-3xl text-xl md:font-semibold font-bold ">
             Why Financial Planning Matters
           </h2>
-          <div className="flex md:flex-row flex-col-reverse justify-between gap-30 items-center w-10/12 mx-auto mb-10">
+          <div className="flex md:flex-row flex-col-reverse justify-between md:gap-30 items-center w-10/12 mx-auto mb-10">
             <img
               src={whyPng}
-              className="md:max-w-[400px] max-w-[300px] flex-1"
+              className="md:max-w-[300px] max-w-[300px] flex-1"
               alt=""
             />
             <p className="flex-1 lg:text-2xl md:text-lg text-lg">
