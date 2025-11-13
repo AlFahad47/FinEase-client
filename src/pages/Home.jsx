@@ -19,7 +19,10 @@ const Home = () => {
   const [dataLoading, setDataLoading] = useState(true);
 
   useEffect(() => {
-    if (!user?.email) return;
+    if (!user?.email) {
+      setDataLoading(false);
+      return;
+    }
     axiosInstance
       .get(`/overviews?email=${user?.email}`)
 

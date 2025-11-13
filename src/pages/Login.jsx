@@ -13,7 +13,9 @@ const Login = () => {
   } = useContext(AuthContext);
 
   const location = useLocation();
-  const from = location.state || "/";
+  const from = location.state?.from || "/";
+
+  console.log(from);
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
@@ -50,9 +52,9 @@ const Login = () => {
         toast.error(e.message);
       });
   };
-  if (user) {
-    return <Navigate to="/" />;
-  }
+  // if (user) {
+  //   return <Navigate to="/" />;
+  // }
 
   return (
     <div className="flex mt-[50px] min-h-[720px] md:w-11/12 mx-auto">
