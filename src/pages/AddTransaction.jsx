@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthContext";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import Loading from "./Loading";
 
 const expenseList = [
   "Home",
@@ -85,7 +86,7 @@ const AddTransaction = () => {
             checked={isEnabled}
             onChange={handleTypeChange}
           />
-          <span class="slider"></span>
+          <span className="slider"></span>
         </label>
 
         <select name="category" className="select " required>

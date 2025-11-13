@@ -94,7 +94,7 @@ const UpdateTransaction = () => {
             checked={isEnabled}
             onChange={handleTypeChange}
           />
-          <span class="slider"></span>
+          <span className="slider"></span>
         </label>
 
         <select
