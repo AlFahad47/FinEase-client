@@ -3,6 +3,7 @@ import logoImg from "../assets/logo.png";
 import { use } from "react";
 import { AuthContext } from "../provider/AuthContext";
 import { toast } from "react-toastify";
+import { PuffLoader } from "react-spinners";
 const Navbar = () => {
   const { user, setUser, loading, setLoading, signoutUserFunc } =
     use(AuthContext);
@@ -102,7 +103,11 @@ const Navbar = () => {
           </label>
           {/* profile */}
 
-          {user ? (
+          {loading ? (
+            <div>
+              <PuffLoader size={40} />
+            </div>
+          ) : user ? (
             <div className="dropdown dropdown-end">
               <div
                 tabIndex={0}

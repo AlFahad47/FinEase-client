@@ -4,16 +4,20 @@ import useAxios from "../hooks/useAxios";
 import { AuthContext } from "../provider/AuthContext";
 import tipsPng from "../assets/tips.png";
 import whyPng from "../assets/why.png";
+import Loading from "./Loading";
+import { PuffLoader } from "react-spinners";
 
 const Home = () => {
   const axiosInstance = useAxios();
-  const { user, loading } = use(AuthContext);
+  const { user, loading, setLoading } = use(AuthContext);
   const [totals, setTotals] = useState({
+    balance: 0,
     totalIncome: 0,
     totalExpense: 0,
-    balance: 0,
   });
+
   useEffect(() => {
+    if (!user?.email) return;
     axiosInstance
       .get(`/overviews?email=${user?.email}`)
 
@@ -23,6 +27,11 @@ const Home = () => {
         console.log(totals);
       });
   }, [axiosInstance, user]);
+
+  // if (loading) {
+  //   return <Loading />;
+  // }
+
   return (
     <div>
       {/* Banner Section (motivational tagline)    */}
@@ -48,17 +57,23 @@ const Home = () => {
           Smart Money Management Made Simple
         </h2>
         <div className="flex md:flex-row flex-col md:gap-25 gap-7 text-center my-4">
-          <div>
+          <div className="flex flex-col items-center">
             <h2 className="font-normal text-sm">Total Balance</h2>
-            <h2 className="font-black text-6xl mt-4">{totals.balance}</h2>
+            <h2 className="font-black text-6xl mt-4">
+              {loading ? <PuffLoader size={50}></PuffLoader> : totals.balance}
+            </h2>
           </div>
-          <div>
+          <div className="flex flex-col items-center">
             <h2 className="font-normal text-sm">Total Income</h2>
-            <h2 className="font-black text-6xl mt-4">{totals.totalIncome}</h2>
+            <h2 className="font-black text-6xl mt-4 ">
+              {loading ? <PuffLoader></PuffLoader> : totals.totalIncome}
+            </h2>
           </div>
-          <div>
+          <div className="flex flex-col items-center">
             <h2 className="font-normal text-sm">Total Expenses </h2>
-            <h2 className="font-black text-6xl mt-4">{totals.totalExpense}</h2>
+            <h2 className="font-black text-6xl mt-4">
+              {loading ? <PuffLoader></PuffLoader> : totals.totalExpense}
+            </h2>
           </div>
         </div>
       </div>

@@ -1,12 +1,16 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthContext";
 import { Link } from "react-router";
+import Loading from "./Loading";
 
 const Profile = () => {
   const { user, loading } = useContext(AuthContext);
 
+  if (loading) {
+    return <Loading />;
+  }
   return (
-    <div className="flex  flex-col items-center   my-10 bg-base-300 p-5 max-w-[600px] rounded-3xl mx-auto">
+    <div className="flex  flex-col items-center   my-10 bg-base-300 p-5 max-w-[600px] md:my-25 rounded-3xl mx-auto">
       <h2 className="font-bold my-4 text-2xl">My Profile</h2>
       <div className="flex flex-col gap-2.5 items-center w-10/12 mx-auto">
         <img
