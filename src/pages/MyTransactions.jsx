@@ -13,6 +13,7 @@ const MyTransactions = () => {
   const [transactions, setTransactions] = useState([]);
   const axiosSecure = useAxiosSecure();
   const [sort, setSort] = useState("date-desc");
+  const [dataLoading, setDataLoading] = useState(true);
 
   useEffect(() => {
     const [field, order] = sort.split("-");
@@ -25,7 +26,8 @@ const MyTransactions = () => {
       .then((data) => {
         console.log("secure transaction data", data);
         setTransactions(data.data);
-      });
+      })
+      .finally(() => setDataLoading(false));
   }, [user, axiosSecure, sort]);
 
   const handleDeleteTransaction = (_id) => {
@@ -62,7 +64,7 @@ const MyTransactions = () => {
     });
   };
 
-  if (loading) return <Loading></Loading>;
+  if (loading || dataLoading) return <Loading></Loading>;
   if (!transactions.length) return <NoData></NoData>;
   return (
     <div>

@@ -6,6 +6,7 @@ import { AuthContext } from "../provider/AuthContext";
 
 import incomePng from "../assets/income.png";
 import expensePng from "../assets/expense.png";
+import Loading from "./Loading";
 
 const TransactionDetails = () => {
   const { id } = useParams();
@@ -15,6 +16,7 @@ const TransactionDetails = () => {
   const axiosSecure = useAxiosSecure();
 
   const { user, loading } = use(AuthContext);
+  const [dataLoading, setDataLoading] = useState(true);
 
   useEffect(() => {
     axiosInstance
@@ -32,13 +34,15 @@ const TransactionDetails = () => {
             console.log("secure transaction data", res.data.total);
             setTotal(res.data.total);
           });
-      });
+      })
+      .finally(() => setDataLoading(false));
   }, [id, axiosInstance, user, axiosSecure]);
 
+  if (loading || dataLoading) return <Loading></Loading>;
   console.log(id);
   return (
     <>
-      <div className="flex  flex-col items-center justify-center  my-10 bg-base-300 py-5 px-12 max-w-[400px] rounded-lg min-h-96 border mx-auto">
+      <div className="flex  flex-col items-center justify-center  my-10 bg-base-300 py-5 px-12 max-w-[400px] rounded-lg min-h-96 border mx-auto md:my-30">
         <h2 className="p-2 bg-accent w-full text-2xl font-bold text-center rounded-lg">
           Transaction Details
         </h2>

@@ -32,6 +32,7 @@ const Reports = () => {
 
   const [chart, setChart] = useState([]);
   const [barChart, setBarChart] = useState([]);
+  const [dataLoading, setDataLoading] = useState(true);
   useEffect(() => {
     // if (!user?.email) return;
 
@@ -52,10 +53,11 @@ const Reports = () => {
             month: formatMonth(item.month),
           }))
         );
-      });
+      })
+      .finally(() => setDataLoading(false));
   }, [user, axiosInstance]);
 
-  if (loading) return <Loading></Loading>;
+  if (loading || dataLoading) return <Loading></Loading>;
   if (!barChart.length && !chart.length) return <NoData></NoData>;
   return (
     <div>

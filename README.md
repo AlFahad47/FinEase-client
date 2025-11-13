@@ -2,7 +2,7 @@
 
 **FinEase** is a modern, responsive personal finance management web application that helps users track income, expenses, set budgets, and visualize financial insights through interactive charts.
 
-🌐 **Live Site URL**: [https://test.netlify.app]
+🌐 **Live Site URL**: [https://fine-ease-new.netlify.app]
 
 ---
 

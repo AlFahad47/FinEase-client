@@ -3,6 +3,7 @@ import { AuthContext } from "../provider/AuthContext";
 import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import Loading from "./Loading";
 
 const expenseList = [
   "Home",
@@ -20,7 +21,7 @@ const expenseList = [
 const incomeList = ["Salary", "Pocket Money", "Business"];
 
 const UpdateTransaction = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
@@ -28,15 +29,20 @@ const UpdateTransaction = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [category, setCategory] = useState("");
   const [transaction, setTransaction] = useState({});
+  const [dataLoading, setDataLoading] = useState(true);
+
   const currentCategoryList = isEnabled ? expenseList : incomeList;
   useEffect(() => {
-    axiosSecure.get(`/transaction/${id}`).then((res) => {
-      const t = res.data;
-      setIsEnabled(t.type === "Expense");
-      setCategory(t.category);
-      setTransaction(t);
-      // setLoading(false);
-    });
+    axiosSecure
+      .get(`/transaction/${id}`)
+      .then((res) => {
+        const t = res.data;
+        setIsEnabled(t.type === "Expense");
+        setCategory(t.category);
+        setTransaction(t);
+        // setLoading(false);
+      })
+      .finally(() => setDataLoading(false));
   }, [id, axiosSecure]);
 
   const handleTypeChange = (e) => {
@@ -79,6 +85,7 @@ const UpdateTransaction = () => {
     }
   };
 
+  if (loading || dataLoading) return <Loading></Loading>;
   return (
     <div className="flex  flex-col items-center   my-10 bg-base-300 p-5 max-w-[600px] rounded-3xl mx-auto">
       <h2 className="font-bold my-4 text-2xl">Update Transaction</h2>

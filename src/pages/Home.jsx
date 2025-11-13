@@ -16,6 +16,8 @@ const Home = () => {
     totalExpense: 0,
   });
 
+  const [dataLoading, setDataLoading] = useState(true);
+
   useEffect(() => {
     if (!user?.email) return;
     axiosInstance
@@ -25,12 +27,11 @@ const Home = () => {
         // console.log("after axios get overviews", data.data);
         setTotals(data.data);
         console.log(totals);
-      });
+      })
+      .finally(() => setDataLoading(false));
   }, [axiosInstance, user]);
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
+  // if (loading || dataLoading) return <Loading></Loading>;
 
   return (
     <div>
@@ -61,19 +62,31 @@ const Home = () => {
           <div className="flex flex-col items-center">
             <h2 className="font-normal text-sm">Total Balance</h2>
             <h2 className="font-black text-6xl mt-4">
-              {loading ? <PuffLoader size={50}></PuffLoader> : totals.balance}
+              {loading || dataLoading ? (
+                <PuffLoader size={50}></PuffLoader>
+              ) : (
+                totals.balance
+              )}
             </h2>
           </div>
           <div className="flex flex-col items-center">
             <h2 className="font-normal text-sm">Total Income</h2>
             <h2 className="font-black text-6xl mt-4 ">
-              {loading ? <PuffLoader></PuffLoader> : totals.totalIncome}
+              {loading || dataLoading ? (
+                <PuffLoader></PuffLoader>
+              ) : (
+                totals.totalIncome
+              )}
             </h2>
           </div>
           <div className="flex flex-col items-center">
             <h2 className="font-normal text-sm">Total Expenses </h2>
             <h2 className="font-black text-6xl mt-4">
-              {loading ? <PuffLoader></PuffLoader> : totals.totalExpense}
+              {loading || dataLoading ? (
+                <PuffLoader></PuffLoader>
+              ) : (
+                totals.totalExpense
+              )}
             </h2>
           </div>
         </div>
