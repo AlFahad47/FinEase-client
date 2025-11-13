@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthContext";
 import { toast } from "react-toastify";
 
@@ -9,6 +9,7 @@ const Login = () => {
     setUser,
     setLoading,
     signInWithGoogleFunc,
+    user,
   } = useContext(AuthContext);
 
   const location = useLocation();
@@ -49,6 +50,9 @@ const Login = () => {
         toast.error(e.message);
       });
   };
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="flex mt-[50px] min-h-[720px] md:w-11/12 mx-auto">

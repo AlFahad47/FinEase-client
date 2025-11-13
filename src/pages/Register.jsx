@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthContext";
 import { toast } from "react-toastify";
 
@@ -10,6 +10,7 @@ const Register = () => {
     setUser,
     signInWithGoogleFunc,
     setLoading,
+    user,
   } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -64,6 +65,9 @@ const Register = () => {
       });
   };
 
+  if (user) {
+    return <Navigate to="/" />;
+  }
   return (
     <div className="flex mt-[50px] min-h-[720px] md:w-11/12 mx-auto">
       <div className="flex-3 flex flex-col items-center justify-center  md:shadow-sm md:rounded-l-xl md:border border-r-0 md:border-accent-content">
