@@ -100,7 +100,12 @@ const MyTransactions = () => {
               <h2 className="text-xl">{transaction.amount} TK</h2>
             </div>
             <div className="flex justify-evenly  w-10/12 mx-auto mb-5">
-              <button className="btn btn-primary ">Update </button>
+              <Link
+                to={`/update-transaction/${transaction._id}`}
+                className="btn btn-primary "
+              >
+                Update{" "}
+              </Link>
               <button
                 onClick={() => handleDeleteTransaction(transaction._id)}
                 className="btn bg-red-500 border-0 text-white  "
