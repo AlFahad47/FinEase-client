@@ -14,7 +14,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const COLORS = ["green", "red", "blue", "yellow"];
+const COLORS = ["green", "red", "blue", "#EEA121 "];
 
 const Reports = () => {
   // convert number to month
@@ -55,42 +55,56 @@ const Reports = () => {
 
   if (loading) return <p>loading</p>;
   return (
-    <div className="flex md:flex-row flex-col justify-between w-11/12 mx-auto my-10">
-      <ResponsiveContainer width="100%" height={500}>
-        <PieChart>
-          <Pie
-            data={chart}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={({ name, percent }) =>
-              `${name} ${(percent * 100).toFixed(0)}%`
-            }
-            outerRadius={80}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {chart.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-        </PieChart>
-      </ResponsiveContainer>
+    <div>
+      <h2 className="text-center font-semibold md:text-4xl text-2xl mt-15">
+        My Reports
+      </h2>
+      <div className="flex md:flex-row flex-col justify-between w-11/12 mx-auto my-10">
+        <div className="flex w-full flex-col items-center">
+          <ResponsiveContainer width="100%" height={400}>
+            <PieChart>
+              <Pie
+                data={chart}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={({ name, percent }) =>
+                  `${name} ${(percent * 100).toFixed(0)}%`
+                }
+                outerRadius={80}
+                fill="#FF8C00"
+                dataKey="value"
+              >
+                {chart.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
+          <h2 className="font-semibold text-lg md:mt-5  mb-15">Categories</h2>
+        </div>
 
-      <ResponsiveContainer width="100%" height={400}>
-        <BarChart data={barChart}>
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="income" fill="green" />
-          <Bar dataKey="expense" fill="red" />
-        </BarChart>
-      </ResponsiveContainer>
+        <div className="flex w-full flex-col items-center">
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart data={barChart}>
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="income" fill="green" />
+              <Bar dataKey="expense" fill="red" />
+            </BarChart>
+          </ResponsiveContainer>
+          <h2 className="font-semibold text-lg md:mt-5 mb-15">
+            {" "}
+            Monthly totals
+          </h2>
+        </div>
+      </div>
     </div>
   );
 };
