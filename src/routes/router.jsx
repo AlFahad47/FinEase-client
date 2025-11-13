@@ -11,6 +11,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PageNotFound from "../pages/PageNotFound";
 import UpdateProfile from "../pages/UpdateProfile";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -18,13 +19,62 @@ export const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/add-transaction", element: <AddTransaction /> },
-      { path: "/my-transactions", element: <MyTransactions /> },
-      { path: "/update-transaction/:id", element: <UpdateTransaction /> },
-      { path: "/transaction-details/:id", element: <TransactionDetails /> },
-      { path: "/reports", element: <Reports /> },
-      { path: "/profile", element: <Profile /> },
-      { path: "/update-profile", element: <UpdateProfile /> },
+      {
+        path: "/add-transaction",
+        element: (
+          <PrivateRoute>
+            <AddTransaction />{" "}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-transactions",
+        element: (
+          <PrivateRoute>
+            <MyTransactions />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-transaction/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateTransaction />{" "}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/transaction-details/:id",
+        element: (
+          <PrivateRoute>
+            <TransactionDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/reports",
+        element: (
+          <PrivateRoute>
+            <Reports />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/update-profile",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
+          </PrivateRoute>
+        ),
+      },
 
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
